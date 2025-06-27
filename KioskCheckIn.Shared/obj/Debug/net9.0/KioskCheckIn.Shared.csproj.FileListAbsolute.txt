@@ -1,0 +1,11 @@
+C:\Blazor Kiosk\KioskCheckIn.Shared\bin\Debug\net9.0\KioskCheckIn.Shared.deps.json
+C:\Blazor Kiosk\KioskCheckIn.Shared\bin\Debug\net9.0\KioskCheckIn.Shared.dll
+C:\Blazor Kiosk\KioskCheckIn.Shared\bin\Debug\net9.0\KioskCheckIn.Shared.pdb
+C:\Blazor Kiosk\KioskCheckIn.Shared\obj\Debug\net9.0\KioskCheckIn.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Blazor Kiosk\KioskCheckIn.Shared\obj\Debug\net9.0\KioskCheckIn.Shared.AssemblyInfoInputs.cache
+C:\Blazor Kiosk\KioskCheckIn.Shared\obj\Debug\net9.0\KioskCheckIn.Shared.AssemblyInfo.cs
+C:\Blazor Kiosk\KioskCheckIn.Shared\obj\Debug\net9.0\KioskCheckIn.Shared.csproj.CoreCompileInputs.cache
+C:\Blazor Kiosk\KioskCheckIn.Shared\obj\Debug\net9.0\KioskCheckIn.Shared.dll
+C:\Blazor Kiosk\KioskCheckIn.Shared\obj\Debug\net9.0\refint\KioskCheckIn.Shared.dll
+C:\Blazor Kiosk\KioskCheckIn.Shared\obj\Debug\net9.0\KioskCheckIn.Shared.pdb
+C:\Blazor Kiosk\KioskCheckIn.Shared\obj\Debug\net9.0\ref\KioskCheckIn.Shared.dll

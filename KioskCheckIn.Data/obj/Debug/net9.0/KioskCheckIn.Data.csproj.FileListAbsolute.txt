@@ -1,0 +1,17 @@
+C:\Blazor Kiosk\KioskCheckIn.Data\bin\Debug\net9.0\KioskCheckIn.Data.deps.json
+C:\Blazor Kiosk\KioskCheckIn.Data\bin\Debug\net9.0\KioskCheckIn.Data.runtimeconfig.json
+C:\Blazor Kiosk\KioskCheckIn.Data\bin\Debug\net9.0\KioskCheckIn.Data.dll
+C:\Blazor Kiosk\KioskCheckIn.Data\bin\Debug\net9.0\KioskCheckIn.Data.pdb
+C:\Blazor Kiosk\KioskCheckIn.Data\bin\Debug\net9.0\KioskCheckIn.Shared.dll
+C:\Blazor Kiosk\KioskCheckIn.Data\bin\Debug\net9.0\KioskCheckIn.Shared.pdb
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskCheckIn.Data.csproj.AssemblyReference.cache
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskCheckIn.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskCheckIn.Data.AssemblyInfoInputs.cache
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskCheckIn.Data.AssemblyInfo.cs
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskCheckIn.Data.csproj.CoreCompileInputs.cache
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskChe.5DB6EBAA.Up2Date
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskCheckIn.Data.dll
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\refint\KioskCheckIn.Data.dll
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskCheckIn.Data.pdb
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\KioskCheckIn.Data.genruntimeconfig.cache
+C:\Blazor Kiosk\KioskCheckIn.Data\obj\Debug\net9.0\ref\KioskCheckIn.Data.dll

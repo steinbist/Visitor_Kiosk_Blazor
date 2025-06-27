@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\KioskCheckIn.Web.props" />
+</Project>

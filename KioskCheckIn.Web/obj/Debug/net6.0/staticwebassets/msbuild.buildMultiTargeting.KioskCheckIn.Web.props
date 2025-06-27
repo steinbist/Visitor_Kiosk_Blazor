@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\KioskCheckIn.Web.props" />
+</Project>
