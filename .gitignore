@@ -176,3 +176,6 @@
 /KioskCheckIn.Web/obj/Debug/net9.0/compressed
 /KioskCheckIn.Web/obj/Debug/net9.0
 /KioskCheckIn.Web/obj/KioskCheckIn.Web.csproj.nuget.g.targets
+/.vs/KioskCheckInSolution/FileContentIndex
+/KioskCheckIn.Data/obj/Debug/net9.0/KioskCheckIn.Data.AssemblyInfo.cs
+/KioskCheckIn.Shared/obj/Debug/net9.0/KioskCheckIn.Shared.AssemblyInfo.cs

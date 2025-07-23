@@ -1,13 +1,21 @@
+using KioskCheckIn.API.Helpers;
+using KioskCheckIn.Web.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using KioskCheckIn.Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddScoped<HttpClient>(sp =>
+{
+    var navManager = sp.GetRequiredService<NavigationManager>();
+    return new HttpClient { BaseAddress = new Uri(navManager.BaseUri) };
+});
+
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<VisitorState>();
 
 var app = builder.Build();
 

@@ -6,3 +6,12 @@
 }
 
 <component type="typeof(App)" render-mode="ServerPrerendered" />
+<script>
+    window.blazorFocusElement = function (element) {
+        if (element) {
+            element.focus();
+        }
+    };
+</script>
+
+

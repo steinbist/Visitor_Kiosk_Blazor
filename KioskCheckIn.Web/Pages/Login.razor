@@ -1,0 +1,196 @@
+﻿@page "/"
+@using KioskCheckIn.Web.Shared.Models
+@inject IJSRuntime JS
+@inject HttpClient httpClient
+@inject NavigationManager navMan
+
+<div class="login-page">
+    <div class="login-form-container">
+        <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label>PIN</label>
+                <InputText class="form-control"
+                @bind-Value="loginModel.PIN"
+                @ref="pinInputRef"
+                @onfocus="OnPinFocus"
+                readonly="@(!isPinEditable)" />
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <InputText class="form-control"
+                @bind-Value="loginModel.Username"
+                @ref="usernameInputRef"
+                @onfocus="OnUsernameFocus"
+                readonly="@(!isUsernameEditable)" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <InputText class="form-control"
+                @bind-Value="loginModel.Password"
+                type="password"
+                readonly="@(!isUsernameEditable)" />
+            </div>
+
+            <div class="button-stack">
+              <button type="submit"
+                class="login-button"
+                disabled="@isLoggingIn"
+                @onclick="HandleLogin">
+                    @(isLoggingIn ? "Logging in..." : "Login")
+              </button>
+
+              <div class="cancel-button">
+                <button type="reset"
+                    class="login-button"
+                    @onclick="ResetForm">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            @if (loginFailed)
+            {
+                <p style="color:red;">Username/Password or PIN is incorrect</p>
+            }
+
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+
+    private bool loginFailed = false;
+
+    private LoginModel loginModel = new();
+
+    private bool isPinEditable = true;
+    private bool isUsernameEditable = false;
+
+    private InputText? pinInputRef;
+    private InputText? usernameInputRef;
+
+    // Threadsafe flag
+    private bool isLoggingIn = false;
+
+    private bool CanLogin =>
+        (!string.IsNullOrWhiteSpace(loginModel.PIN) && isPinEditable) ||
+        (!string.IsNullOrWhiteSpace(loginModel.Username) && isUsernameEditable);
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await FocusPinAsync();
+        }
+    }
+
+
+
+    private async Task OnPinFocus(FocusEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(loginModel.Username) &&
+            string.IsNullOrWhiteSpace(loginModel.Password))
+        {
+            isPinEditable = true;
+            isUsernameEditable = false;
+            await FocusPinAsync();
+        }
+        else
+        {
+            // If username/password have values, don’t allow focus change back to PIN
+            await FocusUsernameAsync();
+        }
+    }
+
+
+    private async Task OnUsernameFocus(FocusEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(loginModel.PIN))
+        {
+            isUsernameEditable = true;
+            isPinEditable = false;
+            await FocusUsernameAsync();
+        }
+        else
+        {
+            // Username shouldn't be editable if PIN has content
+            await FocusPinAsync();
+        }
+    }
+
+    private async Task FocusPinAsync()
+    {
+        if (pinInputRef is not null)
+        {
+            await JS.InvokeVoidAsync("blazorFocusElement", pinInputRef.Element);
+        }
+    }
+
+    private async Task FocusUsernameAsync()
+    {
+        if (usernameInputRef is not null)
+        {
+            await JS.InvokeVoidAsync("blazorFocusElement", usernameInputRef.Element);
+        }
+    }
+
+    /// <summary>
+    /// Handles login request 
+    /// </summary>
+    /// <returns></returns>
+    private async Task HandleLogin()
+    {
+        var method = !string.IsNullOrWhiteSpace(loginModel.PIN) ? "PIN" : "Username";
+        // Thread check
+        if (isLoggingIn)
+            return; 
+
+        try
+        {
+            // Set threadsafe flag
+            isLoggingIn = true;
+
+            // Create Client ID for identification - will get baked into the token.
+            loginModel.ClientId = Guid.NewGuid().ToString();
+            var response = await httpClient.PostAsJsonAsync("https://localhost:7291/api/login", loginModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                loginFailed = false;
+                Console.WriteLine("Login Successful.");
+                navMan.NavigateTo("/idle");
+            }
+            else
+            {
+                loginFailed = true;
+                Console.WriteLine("Login failed.");
+            }
+        }
+        catch(Exception ex)
+        {
+
+        }
+        finally
+        {
+            isLoggingIn = false;
+        }
+
+        Console.WriteLine($"Logging in using: {method}");
+    }
+
+    private async Task ResetForm()
+    {
+        loginModel = new LoginModel(); 
+        loginFailed = false; // Clear error message
+        isPinEditable = true;
+        isUsernameEditable = false;
+
+        await InvokeAsync(() => StateHasChanged());                     // Re-render UI
+        await Task.Delay(1);                   // Wait a tick for UI to render
+        await FocusPinAsync();                 // Put focus back on PIN
+    }
+}

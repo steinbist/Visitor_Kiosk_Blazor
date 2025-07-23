@@ -1,7 +1,13 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    overflow: hidden;
 }
 
 h1:focus {
@@ -62,3 +68,344 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+/* Make the full login page use the background image */
+.login-page {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/images/SoldierImage.png'); /* Ensure your image is in wwwroot/images */
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+}
+.idle-page {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/images/SoldierImage.png'); /* Ensure your image is in wwwroot/images */
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    display: flex;
+}
+
+/* Float the form in the upper-left quadrant */
+.login-form-container {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional semi-transparent background */
+    padding: 30px;
+    border-radius: 8px;
+    width: 280px;
+    color: white;
+}
+
+/* Basic form styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.form-control[readonly] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: darkgray;
+}
+
+.login-button {
+    width: 100%;
+    background-color: #1a237e;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out, background-color 0.2s;
+    user-select: none;
+}
+
+    .login-button:active {
+        transform: scale(0.92); /* Slight shrink effect */
+        background-color: #0d47a1; /* Darker for login */
+    }
+
+    .button-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Adds consistent spacing between buttons */
+    }
+
+.idle-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #111;
+}
+
+.button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.begin-button {
+    position: relative;
+    width: 380px;
+    height: 190px;
+    z-index: 1;
+    padding: 2rem 2rem;
+    font-size: 3.0rem;
+    background-color: #1a237e;
+    color: white;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+
+    /* New */
+    display: flex;
+    justify-content: center; /* horizontal alignment */
+    align-items: revert-layer; /* vertical alignment */
+    text-align: center;
+    overflow: hidden;
+}
+    .begin-button:hover {
+        background-color: #0b5ed7;
+        transform: scale(0.92);
+    }
+
+.touch-icon {
+    position: absolute;
+    bottom: 20px; /* push slightly outside the button */
+    right: 130px; /* push slightly outside the button */
+    width: 80px; /* make it larger */
+    transform: rotate(-35deg); /* diagonal pointing in */
+    z-index: 2;
+    pointer-events: none;
+}
+    
+.idle-form-container {
+    position: absolute;
+    top: 40%;
+    left: 8%;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional semi-transparent background */
+    padding: 16px;
+    border-radius: 18px;
+    width: 410px;
+    height:220px;
+    color: white;
+}
+
+.visitor-page {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/images/Background.png'); /* Ensure your image is in wwwroot/images */
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    display: flex;
+}
+
+.search-form-container {
+    position: absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional semi-transparent background */
+    padding: 30px;
+    height:600px;
+    top: 20%;
+    left: 30%;
+    border-radius: 18px;
+    width: 600px;
+    color: white;
+}
+
+.search-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.search-field-label {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: white;
+}
+
+.search-for-fields{
+    width: 400px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.search-page-button {
+    width: 130px;
+    background-color: #1a237e;
+    color: white;
+    padding: 20px;
+    border: none;
+    font-size:1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out, background-color 0.2s;
+    user-select: none;
+    border-radius : 18px;
+    margin-top: 15px;
+    margin-right:7px;
+}
+
+.search-page-button:hover {
+    transform: scale(0.92); /* Slight shrink effect */
+    background-color: #0b5ed7;
+}
+
+.visitor-form-container {
+    position: absolute;
+    display: flex;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional semi-transparent background */
+    padding: 30px;
+    width: 600px;
+    color: white;
+}
+
+.visitor-info-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.visitor-info-field {
+    width: 200%;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: #f0f0f0;
+    font-weight:800;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+}
+
+.visitor-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align right within this section */
+    margin-left: 40%;
+    padding-top: 10%;
+}
+
+.visitor-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional semi-transparent background */
+    padding: 30px;
+    height: 600px;
+    top: 20%;
+    left: 40%;
+    border-radius: 18px;
+    width: 500px;
+    margin-bottom: 10px;
+}
+
+.visitor-image {
+    height: 570px;
+    left: 40%;
+    align-self: center; /* Vertically center in flex column */
+    border-radius: 14px;
+}
+
+.image-button-group {
+    display: flex;
+    justify-content: flex-end; /* right-align buttons */
+    gap: 10px;
+    width: 100%;
+}
+
+.info-button
+ {
+    padding: 8px 14px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+}
+
+.info-button {
+    background-color: #1a237e;
+    width: 125px;
+    border: 2px solid black;
+}
+    .info-button:hover {
+        transform: scale(0.92); /* Slight shrink effect */
+        background-color: #0b5ed7;
+    }
+
+.kiosk-information-page {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/images/Background.png'); /* Ensure your image is in wwwroot/images */
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    display: flex;
+}
+
+.information-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vw;
+    height: 70vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 18px;
+    color: white;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.kiosk-information-text {
+    text-align: left;
+    font-family: 'Comic Sans MS';
+    /*, Cochin, Georgia, Times, 'Times New Roman', serif*/
+    font-size: 1.25rem; /* Increase to 1.5rem or 2rem if you want it larger */
+    line-height: 1.6; /* Improves readability */
+}
+
+.login-error-message {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
