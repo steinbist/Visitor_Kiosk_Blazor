@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KioskCheckIn.API\KioskCheckIn.API.csproj" />
+    <ProjectReference Include="..\KioskCheckIn.Data\KioskCheckIn.Data.csproj" />
+  </ItemGroup>
+
+</Project>

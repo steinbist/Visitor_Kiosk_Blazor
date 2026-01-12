@@ -1,0 +1,104 @@
+﻿@page "/visitorinfo"
+
+@using KioskCheckIn.API.Helpers
+@using KioskCheckIn.Data.Models
+
+@inject NavigationManager navMan
+
+
+<div class="visitor-page">
+    <div class="visitor-form-container">
+        <div class="visitor-info-group">
+            <label class="search-field-label">First Name</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.FirstName" />
+            
+            <label class="search-field-label">Middle Name</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.MiddleName" />
+
+            <label class="search-field-label">Last Name</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.LastName" />
+
+            <label class="search-field-label">DOB</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.DateOfBirthString" />
+
+            <label class="search-field-label">Email</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.Email" />
+
+            <label class="search-field-label">Employer</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.Employer" />
+
+            <label class="search-field-label">Gender</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.Gender" />
+
+            <label class="search-field-label">Street Address</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.StreetAddress" />
+
+            <label class="search-field-label">City</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.City" />
+
+            <label class="search-field-label">State</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.State" />
+
+            <label class="search-field-label">Zip Code</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.ZipCode" />
+
+            <label class="search-field-label">Clearances Held</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.Clearances" />
+
+            <label class="search-field-label">Speical Accesses</label>
+            <InputText class="visitor-info-field"
+                       @bind-Value="visitor.SAs" />
+        </div>
+    </div>
+    
+    <div class="visitor-image-section">
+        <div class="visitor-image-container">
+            <img src="images/VisitorImage.png" alt="Visitor Photo" class="visitor-image" />
+        </div>
+
+    <!-- BUTTONS BELOW IMAGE -->
+        <div class="image-button-group">
+            <button class="info-button" @onclick="GoToInfoPage">Info</button>
+            
+   
+        @if (showInfo)
+        {
+            <div class="info-panel">
+                <p>
+                   
+                </p>
+            </div>
+        }
+    </div>
+    </div>
+    
+</div>
+
+
+@code {
+    [Inject] private VisitorState visitorState { get; set; }
+    private Visitor visitor;
+    private bool showInfo = false;
+
+    private void GoToInfoPage()
+    {
+        navMan.NavigateTo("/kioskinformation");
+    }
+
+    protected override void OnInitialized()
+    {
+        visitor = visitorState.CurrentVisitor ?? new Visitor();
+    }
+}

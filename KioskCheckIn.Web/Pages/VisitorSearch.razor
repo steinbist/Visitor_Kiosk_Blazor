@@ -1,0 +1,98 @@
+﻿@page "/visitorsearch"
+
+@using KioskCheckIn.API.Helpers
+@using KioskCheckIn.Data.Models
+@inject IJSRuntime JS
+@inject HttpClient httpClient
+@inject NavigationManager navMan
+@* @inject VisitorState visitorState *@
+
+
+<div class="visitor-page">
+    <div class="search-form-container">
+        <EditForm Model="@visitor" OnInvalidSubmit="SearchVisitor">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="search-form-group">
+                <label class="search-field-label">First Name</label>
+                <InputText class="form-control"
+                           @bind-Value="visitor.FirstName"
+                           @ref="firstNameInputRef" />
+            </div>
+            <div class="search-form-group">
+                <label class="search-field-label">Last Name</label>
+                <InputText class="form-control"
+                           @bind-Value="visitor.LastName" />
+            </div>
+            <div class="search-form-group">
+                <label class="search-field-label">DOB</label>
+                <InputDate class="search-for-fields"
+                           @bind-Value="visitor.DateOfBirth" />
+            </div>
+            <div class="search-form-group">
+                <label class="search-field-label">Email</label>
+                <InputText class="form-control"
+                           @bind-Value="visitor.Email" />
+
+            </div>
+            <div >
+                <button type="reset" class="search-page-button" onclick="@ResetFields">
+                    Clear
+                </button>
+                <button type="button" class="search-page-button" onclick="@CancelSearch">
+                    Cancel
+                </button>
+                <button type="submit" class="search-page-button" onclick="@SearchVisitor">
+                    Search
+                </button>
+            </div>
+        </EditForm>
+    </div>
+
+</div>
+
+@code {
+    private Visitor visitor = new();
+    private InputText? firstNameInputRef;
+    [Inject] private VisitorState visitorState { get; set; }
+
+    private async Task SearchVisitor()
+    {
+        visitor.MiddleName = $"M.";
+        visitor.Employer = $"Lockheed-Martin";
+        visitor.Gender = $"Male";
+        visitor.StreetAddress = $"123 A St.";
+        visitor.City = $"Encinitas";
+        visitor.State = $"California";
+        visitor.ZipCode = $"92024";
+        visitor.DateOfBirthString = visitor.DateOfBirth.ToString();
+
+        visitorState.CurrentVisitor = visitor;
+        navMan.NavigateTo("/visitorinfo");
+    }
+
+    private async Task OnFirstNameFocus()
+    {
+        FocusOnFirstName();
+    }
+
+    private async Task CancelSearch()
+    {
+        navMan.NavigateTo("/idle");
+    }
+
+    private async Task FocusOnFirstName()
+    {
+        if (firstNameInputRef is not null)
+            await JS.InvokeVoidAsync("blazorFocusElement", firstNameInputRef.Element);
+    }
+
+    private async Task ResetFields()
+    {
+        visitor = new Visitor();         // Clear model
+
+        await InvokeAsync(() => StateHasChanged());                     // Re-render UI
+        await Task.Delay(1);                   // Wait a tick for UI to render
+        await FocusOnFirstName();
+    }
+}

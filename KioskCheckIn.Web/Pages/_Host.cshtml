@@ -1,0 +1,17 @@
+﻿@page "/"
+@namespace KioskCheckIn.Web.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+<component type="typeof(App)" render-mode="ServerPrerendered" />
+<script>
+    window.blazorFocusElement = function (element) {
+        if (element) {
+            element.focus();
+        }
+    };
+</script>
+
+

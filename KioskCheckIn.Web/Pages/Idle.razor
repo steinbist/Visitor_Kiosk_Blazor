@@ -1,0 +1,23 @@
+﻿@page "/idle"
+@inject NavigationManager navMan
+
+<div class="idle-page">
+    <div class="idle-form-container">
+        <div class="button-container">
+            <button class="begin-button" @onclick="GoToNextStep">
+                Begin Here
+            </button>
+            <img src="images/finger.svg" class="touch-icon" />
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    private void GoToNextStep()
+    {
+        // Navigate to the next part of your app
+         navMan.NavigateTo("/visitorsearch");
+    }
+}
