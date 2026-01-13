@@ -66,6 +66,8 @@ namespace KioskCheckIn.API.Services
                     var session = await CreateSession(userDTO);
                     if (session != null && httpContext != null)
                     {
+                        // Use cookies for Blazor Server because of the statefulness of SignalR connection
+                        // between browser and server.
                         await _cookie.CreateCookie(user, session, httpContext);
                         result.IsAuthenticated = true;
                     }

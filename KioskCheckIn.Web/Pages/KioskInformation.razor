@@ -1,17 +1,45 @@
 ﻿@page "/kioskinformation"
+@inject NavigationManager Navigation
 
-<div class="kiosk-information-page">
+<div class="kiosk-page">
     <div class="information-container">
         <p class="kiosk-information-text">
             This demo simulates a kiosk visitor check-in process that might be seen in the lobby of secure facilities (eg. Defense Contractors, Government buildings, etc.). The following pages would guide users through
             verifying personal details, printing badges, and submitting visit data to securely during a check in process.
             Similarly, a checked-in visitor would be guided through a checkout process. <br /><br />
-            By clicking the button below, the demo will provide code snippets outlining processes taken to follow security standards in the field today.
+            By clicking the button below, the demo will provide code snippets outlining processes taken to follow Authentication/Password Security, Dependency Injection Pattern, the Repository Pattern,  in the field today.
         </p>
+
+       <div class="lower-right">
+           <div class="btn-row">
+               <span class="btn-label">Go to Code</span>
+               <div class="btn-forward" @onclick="GoToCode">></div>
+               
+           </div>
+       </div>
+        <div class="lower-left">
+            <div class="btn-row">
+                <div class="btn-exit" @onclick="Exit">X</div>
+                <span class="btn-label">Exit</span>
+            </div>
+        </div>
     </div>
+    
 
 </div>
 
 @code {
+
+    private async Task GoToCode()
+    {
+        Navigation.NavigateTo("/loginendpointcodesnip");
+        await Task.CompletedTask;
+    }
+
+    private async Task Exit()
+    {
+        Navigation.NavigateTo("/idle");
+        await Task.CompletedTask;
+    }
 
 }

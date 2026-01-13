@@ -1,0 +1,41 @@
+﻿@page "/authcodesnip"
+@inject NavigationManager Navigation
+
+<div class="kiosk-page">
+    
+    <div class="codesnip-container">
+        <p class="kiosk-information-text">
+            The UserAuthenticationService.AuthenticateUserAsync(...) method takes a UserDTO which contains username and password properties. The method fetches the User with matching username
+            and use the stored password hash and salt to compare the passsed in pasword after hashing it. A session gets created for the user and a cookie gets created.
+            In this scenario, using a cookie is recommended because of its statefulness and the statefulness of SignalR communication between browser and Blazor server.
+        </p>
+        <img class="authasync-img-format" src="images/AuthenticateAsync.png" />
+        <div class="lower-right">
+            <div class="btn-row">
+                <span class="btn-label">Next</span>
+                <div class="btn-forward" @onclick="Next">></div>
+
+            </div>
+        </div>
+        <div class="lower-left">
+            <div class="btn-row">
+                <div class="btn-exit" @onclick="Previous">&lt</div>
+                <span class="btn-label">Previous</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private async Task Next()
+    {
+        Navigation.NavigateTo("/authcodesnip");
+        await Task.CompletedTask;
+    }
+
+    private async Task Previous()
+    {
+        Navigation.NavigateTo("/loginendpointcodesnip");
+        await Task.CompletedTask;
+    }
+}

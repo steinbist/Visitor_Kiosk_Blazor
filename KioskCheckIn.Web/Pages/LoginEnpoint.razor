@@ -1,0 +1,49 @@
+﻿@page "/loginendpointcodesnip"
+@inject NavigationManager Navigation
+
+
+<div class="kiosk-page">
+
+    <div class="codesnip-container">
+        <p class="kiosk-information-text">
+            The LoginController gets created at application stratup. Dependency Injection is used to instantiate the UserAuthenticationService.The LoginController.LoginUser(...)
+            is decorated with [AllowAnonymous] to allow the authentication to occur. The LoginUser(...) endpoint is asynchronous following convention for flow that touches the db downstream. 
+            The endpoint takes a UserDTO passsed in the body of the request where it is validated against being null or in an invalid model state oin which an Http 400 response will be returned
+            in the response. The method then invokes the UserAuthenticationService and calls AuthenticateUserAsync(...) method. The user is validated by the service and a response to the call yields
+            a true, user IsAuthenticated or false user not authenticated. A response to the client renders an Http 200 OK response or an Http 401 Unauthorized response.
+        </p>
+        <img class="loginendpnt-img-format" src="images/LoginEndpoint.png" />
+        <div class="lower-right">
+            <div class="btn-row">
+                <span class="btn-label">Next</span>
+                <div class="btn-forward" @onclick="Next">></div>
+
+            </div>
+        </div>
+        <div class="lower-left">
+            <div class="btn-row">
+                <div class="btn-exit" @onclick="Previous">&lt</div>
+                <span class="btn-label">Previous</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@code {
+    private async Task Next()
+    {
+        Navigation.NavigateTo("/authcodesnip");
+        await Task.CompletedTask;
+    }
+
+    private async Task Previous()
+    {
+        Navigation.NavigateTo("/kioskinformation");
+        await Task.CompletedTask;
+    }
+
+}

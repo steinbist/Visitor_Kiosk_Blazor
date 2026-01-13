@@ -365,7 +365,7 @@ a, .btn-link {
         background-color: #0b5ed7;
     }
 
-.kiosk-information-page {
+.kiosk-page {
     height: 100vh;
     width: 100vw;
     background-image: url('/images/Background.png'); /* Ensure your image is in wwwroot/images */
@@ -408,4 +408,91 @@ a, .btn-link {
     margin-top: 10px;
     font-weight: bold;
 }
+
+.btn-forward {
+    border: black;
+    background: black;
+    font-size: 120px;
+    color: green;
+      
+}
+    .btn-forward:hover {
+        color: #00ff00;
+    }
+    .btn-forward:active {
+        transform: scale(0.85);
+        color: #006400;
+    }
+.btn-exit {
+    border: black;
+    background: black;
+    font-size: 80px;
+    color: Red;
+}
+    .btn-exit:hover {
+        color: #FFCCCB;
+    }
+    .btn-exit:active {
+        transform: scale(0.85);
+        color: #8B0000;
+    }
+
+.lower-right {
+    position: absolute;
+    bottom:30px;
+    right: 60px;
+}
+
+.lower-left {
+    position: absolute;
+    bottom: 55px;
+    left: 60px;
+}
+
+.btn-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-label {
+    font-size: 50px;
+}
+
+
+.codesnip-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vw;
+    height: 90vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 18px;
+    color: white;
+    display: flex;
+    box-sizing: border-box;
+}
+
+
+.authasync-img-format {
+    width: 55%;
+    align-content: center;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 150px;
+}
+
+.loginendpnt-img-format {
+    width: 40%;
+    align-content: center;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 150px;
+}
+
 
