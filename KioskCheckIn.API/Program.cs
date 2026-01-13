@@ -14,6 +14,12 @@ using KioskCheckIn.API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure port for Render hosting (uses PORT env var) or local development
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    builder.WebHost.UseUrls($"http://*:{port}");
+}
 
 // AUTHENTICATION //
 
@@ -103,7 +109,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+// Only use HTTPS redirection in local development (Render handles SSL termination)
+if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PORT")))
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
