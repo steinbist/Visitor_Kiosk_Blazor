@@ -18,8 +18,7 @@ namespace KioskCheckIn.API.Controllers
         }
 
         /// <summary>
-        /// Blazor Server architecture may suggest to eliminate this controller altogether and do app.MapPost(...)
-        /// in the Program.cs file in a Minimal Api solution.
+        /// Login endpoint to Authenticate user
         /// </summary>
         /// <param name="userDto"></param>
         /// <returns></returns>
