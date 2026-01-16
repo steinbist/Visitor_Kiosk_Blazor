@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Kiosk - Blazor Server</title>
+
+    <!-- GitHub Markdown CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown.min.css">
+
+    <!-- Mermaid for flowcharts -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+    <!-- Marked for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+            background-color: #0d1117;
+        }
+
+        .markdown-body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        /* Dark theme adjustments */
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3,
+        .markdown-body h4,
+        .markdown-body h5,
+        .markdown-body h6 {
+            color: #c9d1d9;
+            border-bottom-color: #21262d;
+        }
+
+        .markdown-body a {
+            color: #58a6ff;
+        }
+
+        .markdown-body table {
+            border-collapse: collapse;
+        }
+
+        .markdown-body table th,
+        .markdown-body table td {
+            border: 1px solid #30363d;
+            padding: 6px 13px;
+        }
+
+        .markdown-body table tr {
+            background-color: #0d1117;
+            border-top: 1px solid #21262d;
+        }
+
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #161b22;
+        }
+
+        .markdown-body code {
+            background-color: #161b22;
+            color: #c9d1d9;
+        }
+
+        .markdown-body pre {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+
+        .markdown-body pre code {
+            background-color: transparent;
+        }
+
+        .markdown-body blockquote {
+            border-left-color: #3b434b;
+            color: #8b949e;
+        }
+
+        .markdown-body hr {
+            background-color: #21262d;
+        }
+
+        .markdown-body img {
+            background-color: transparent;
+        }
+
+        /* Mermaid diagram styling */
+        .mermaid {
+            background-color: #161b22;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        /* Badge styling */
+        .markdown-body img[src*="shields.io"] {
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        /* Center div styling */
+        .markdown-body div[align="center"] {
+            text-align: center;
+        }
+
+        /* Loading indicator */
+        #loading {
+            text-align: center;
+            padding: 50px;
+            color: #8b949e;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+        }
+
+        /* Light theme option */
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #ffffff;
+            }
+
+            .markdown-body {
+                background-color: #ffffff;
+                color: #24292f;
+            }
+
+            .markdown-body h1,
+            .markdown-body h2,
+            .markdown-body h3,
+            .markdown-body h4,
+            .markdown-body h5,
+            .markdown-body h6 {
+                color: #24292f;
+                border-bottom-color: #d0d7de;
+            }
+
+            .markdown-body a {
+                color: #0969da;
+            }
+
+            .markdown-body table th,
+            .markdown-body table td {
+                border: 1px solid #d0d7de;
+            }
+
+            .markdown-body table tr {
+                background-color: #ffffff;
+                border-top: 1px solid #d8dee4;
+            }
+
+            .markdown-body table tr:nth-child(2n) {
+                background-color: #f6f8fa;
+            }
+
+            .markdown-body code {
+                background-color: #f6f8fa;
+                color: #24292f;
+            }
+
+            .markdown-body pre {
+                background-color: #f6f8fa;
+                border: 1px solid #d0d7de;
+            }
+
+            .mermaid {
+                background-color: #f6f8fa;
+            }
+
+            #loading {
+                color: #57606a;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 767px) {
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article class="markdown-body" id="content">
+        <div id="loading">Loading documentation...</div>
+    </article>
+
+    <script>
+        // Initialize Mermaid with dark theme
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Custom renderer for Mermaid code blocks
+        const renderer = new marked.Renderer();
+        const originalCodeRenderer = renderer.code.bind(renderer);
+
+        renderer.code = function(code, language) {
+            if (language === 'mermaid') {
+                return `<div class="mermaid">${code}</div>`;
+            }
+            return originalCodeRenderer(code, language);
+        };
+
+        // Configure marked
+        marked.setOptions({
+            renderer: renderer,
+            gfm: true,
+            breaks: false,
+            pedantic: false,
+            smartLists: true,
+            smartypants: false
+        });
+
+        // Fetch and render README
+        async function loadReadme() {
+            try {
+                const response = await fetch('README.md');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const markdown = await response.text();
+
+                // Parse markdown to HTML
+                const html = marked.parse(markdown);
+
+                // Insert into page
+                document.getElementById('content').innerHTML = html;
+
+                // Render Mermaid diagrams
+                await mermaid.run({
+                    querySelector: '.mermaid'
+                });
+
+            } catch (error) {
+                console.error('Error loading README:', error);
+                document.getElementById('content').innerHTML = `
+                    <div style="text-align: center; padding: 50px;">
+                        <h2>Error Loading Documentation</h2>
+                        <p>Could not load README.md</p>
+                        <p style="color: #f85149;">${error.message}</p>
+                        <p><a href="README.md">View README.md directly</a></p>
+                    </div>
+                `;
+            }
+        }
+
+        // Load on page ready
+        document.addEventListener('DOMContentLoaded', loadReadme);
+    </script>
+</body>
+</html>
